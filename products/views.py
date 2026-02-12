@@ -78,7 +78,10 @@ def patch_product(request, pk):
 
 @api_view(['DELETE', ])
 def delete_product(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = Product.objects.filter(pk=pk)
+    if not product:
+        return Response({'success': False, 'message': 'Topilmadi'}) 
+    
     product.delete() 
 
     data = {
